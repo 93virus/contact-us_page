@@ -4,6 +4,66 @@
         <title>Nabler</title>
         <link rel="stylesheet" type="text/css" href="style.css"/>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+        <script>
+            function submit() {
+                var name = document.getElementById('name').value;
+                var email = document.getElementById('email').value;
+                var company = document.getElementById('company').value;
+                var message = document.getElementById('message').value;
+
+                if (name != "") {
+                    document.getElementById('nameerr').style.visibility = "hidden";
+                    if (/[^a-zA-Z\s\-]/.test(name)) {
+                        flag = 1;
+                        document.getElementById('nameerr').style.visibility = "visible";
+                        document.getElementById('nameerr').innerHTML = "Characters in name are not valid!";
+                    }
+                }
+                if(email != "") {
+                    document.getElementById('emailerr').style.visibility = "hidden";   
+                    if (!validateEmail(email)) {
+                        document.getElementById('emailerr').style.visibility = "visible";
+                        document.getElementById('emailerr').innerHTML = "Email address is not in valid format!";
+                        flag = 1;   
+                    }
+                }
+                if (company != "") {document.getElementById('comerr').style.visibility = "hidden";}
+                if (message != "") {
+                    if (message.length < 20) {
+                        flag = 1;
+                        document.getElementById('msgerr').innerHTML = "Message should be minimum of 20 characters!";
+                        document.getElementById('msgerr').style.visibility = "visible";
+                    } else
+                        document.getElementById('msgerr').style.visibility = "hidden";
+                }
+
+
+                if (name === "") {document.getElementById('nameerr').style.visibility = "visible"; flag = 1;document.getElementById('nameerr').innerHTML = "Name is a mandatory field";}
+                    
+                if(email === "") {document.getElementById('emailerr').style.visibility = "visible"; flag = 1;document.getElementById('emailerr').innerHTML = "Email address is a mandatory field";}
+                    
+                if (company === "") {document.getElementById('comerr').style.visibility = "visible"; flag = 1;}
+                    
+                if (message === "") {document.getElementById('msgerr').style.visibility = "visible"; flag = 1;document.getElementById('msgerr').innerHTML = "Message address is a mandatory field";}
+
+                if (flag === 1)
+                    return;
+                    
+            }
+
+            function validateEmail(email) {
+                var re = /\S+@\S+\.\S+/;
+                return re.test(email);
+            }
+
+
+            function clearText() {
+                document.getElementById('name').value = "";
+                document.getElementById('email').value = "";
+                document.getElementById('company').value = "";
+                document.getElementById('message').value = "";
+            }
+        </script>
     </head>
     <body>
         <div class="wrapper">
@@ -17,10 +77,11 @@
                 <div class="container-left-fields">
                     <div class="left-textbox">
                         <span class="tb-l1">
-                        <input type="text" placeholder="Your Name*">
-                        <input type="text" placeholder="Your Email*"></span>
-                        <input type="text" placeholder="Company Name*">
-                        <textarea placeholder="Your Message*"></textarea> 
+                        <div><span class="error" id="nameerr">Name is a mandatory field</span><input type="text" placeholder="Your Name*" id="name"></div>
+                        <div><span class="error" id="emailerr">Email address is a mandatory field</span><input type="text" placeholder="Your Email*" id="email"></div></span>
+                        <div><span class="error" id="comerr">Company Name is a mandatory field</span><input type="text" placeholder="Company Name*" id="company"></div>
+                        <textarea placeholder="Your Message*" id="message"></textarea>
+                        <span class="error" id="msgerr">Message is a mandatory field</span>
                     </div>
                     <div class="checkbox">
                         <input type="checkbox">
@@ -28,8 +89,8 @@
                     </div>
                 </div>
                 <div class="container-left-buttons">
-                    <input type="button" class="button" value="SUBMIT">
-                    <input type="button" class="button" value="RESET">
+                    <input type="button" class="button" onclick="submit()" value="SUBMIT">
+                    <input type="button" class="button" onclick="clearText()" value="RESET">
                 </div>
             </div>
 

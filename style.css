@@ -69,7 +69,7 @@ textarea:focus {
 }
 
 .left-textbox input {
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     height: 40px;
     width: 100%;
     font-size: 15px;
@@ -88,6 +88,7 @@ textarea:focus {
 }
 
 textarea {
+    margin-top: 15px;
     padding: 10px;
     font-size: 15px;
     border-radius: 5px;
@@ -95,11 +96,17 @@ textarea {
     height: 140px;
 }
 
+.error {
+    visibility: hidden;
+    font-size: 80%;
+    color: red;
+}
+
 .checkbox {
     margin-top: 15px;
     color: #3d3d3d;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
 }
 
